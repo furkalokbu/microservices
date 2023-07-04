@@ -1,6 +1,6 @@
-import pika
+import pika, json
 
-params = pika.URLParameters('amqps://oospddyd:8smUeB1YmqROPB57IB-9abtbp_4AGj8A@sparrow.rmq.cloudamqp.com/oospddyd')
+params = pika.URLParameters('')
 connection = pika.BlockingConnection(params)
 channel = connection.channel()
 
@@ -9,4 +9,4 @@ print('start publish')
 def publish(method, body):
     properties = pika.BasicProperties(method)
 
-    channel.basic_publish(exchange='', routing_key='main', body='Hello Main', properties=properties)
+    channel.basic_publish(exchange='', routing_key='main', body=json.dumps(body), properties=properties)
