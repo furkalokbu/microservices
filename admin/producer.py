@@ -6,5 +6,7 @@ channel = connection.channel()
 
 print('start publish')
 
-def publish():
-    channel.basic_publish(exchange='', routing_key='main', body='Hello Main')
+def publish(method, body):
+    properties = pika.BasicProperties(method)
+
+    channel.basic_publish(exchange='', routing_key='main', body='Hello Main', properties=properties)
