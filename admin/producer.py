@@ -1,6 +1,11 @@
-import pika, json
+import os, pika, json
+from dotenv import load_dotenv
 
-params = pika.URLParameters('')
+
+load_dotenv(os.path.join(os.getcwd(), '.env'))
+AMQP = os.getenv('AMQP')
+
+params = pika.URLParameters(AMQP)
 connection = pika.BlockingConnection(params)
 channel = connection.channel()
 
